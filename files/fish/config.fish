@@ -54,5 +54,12 @@ abbr !! sudo vf
 
 abbr dps docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"
 
+abbr ga git add
+abbr gb git branch
+abbr gc git commit
+abbr gr git rebase
+abbr gs git status
+abbr gsw git switch
+
 abbr kbp kubectl get pods
 abbr kbx kubectl exec -it
