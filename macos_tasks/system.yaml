@@ -1,0 +1,400 @@
+# ---
+#   - name: "System: Check for Updates Daily"
+#     osx_defaults:
+#       domain: com.apple.SoftwareUpdate
+#       key: ScheduleFrequency
+#       type: int
+#       value: 1
+  
+#   - name: "System: Auto Download Updates"
+#     osx_defaults:
+#       domain: com.apple.SoftwareUpdate
+#       key: AutomaticDownload
+#       type: bool
+#       value: true
+  
+#   - name: "System: Set Highlight Colour to Pink"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: AppleHighlightColor
+#       type: string
+#       value: "1.000000 0.749020 0.823529 Pink"
+  
+#   - name: "System: Set Accent Colour to Pink"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: AppleAccentColor
+#       type: int
+#       value: 6
+  
+#   - name: "System: Disable Smart Quotes"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: NSAutomaticQuoteSubstitutionEnabled
+#       type: bool
+#       value: false
+  
+#   - name: "System: Disable Smart Dashes"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: NSAutomaticDashSubstitutionEnabled
+#       type: bool
+#       value: false
+  
+#   - name: "System: Disable Auto Capitalisation"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: NSAutomaticCapitalizationEnabled
+#       type: bool
+#       value: false
+  
+#   - name: "System: Disable Auto Correct"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: NSAutomaticSpellingCorrectionEnabled
+#       type: bool
+#       value: false
+  
+#   - name: "System: Always show scrollbars"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: AppleShowScrollBars
+#       type: string
+#       value: Always
+  
+#   - name: "System: Allow Tab UI Control"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: AppleKeyboardUIMode
+#       type: int
+#       value: 3
+  
+#   - name: "System: Zoom when holding Control"
+#     osx_defaults:
+#       domain: com.apple.universalaccess
+#       key: closeViewScrollWheelToggle
+#       type: bool
+#       value: true
+  
+#   - name: "Dock: Show only running apps"
+#     osx_defaults:
+#       domain: com.apple.dock
+#       key: static-only
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Dock"
+  
+#   - name: "Dock: Minimize to application"
+#     osx_defaults:
+#       domain: com.apple.dock
+#       key: minimize-to-application
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Dock"
+  
+#   - name: "Dock: Disable Indicator Lights"
+#     osx_defaults:
+#       domain: com.apple.dock
+#       key: show-process-indicators
+#       type: bool
+#       value: false
+#     notify:
+#       - "Restart Dock"
+
+#   - name: "Dock: Autohide"
+#     osx_defaults:
+#       domain: com.apple.dock
+#       key: autohide
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Dock"
+  
+#   - name: "Dock: Unhide Immediately"
+#     osx_defaults:
+#       domain: com.apple.dock
+#       key: autohide-delay
+#       type: float
+#       value: 0
+#     notify:
+#       - "Restart Dock"
+  
+#   - name: "Dock: Don't show recent apps"
+#     osx_defaults:
+#       domain: com.apple.dock
+#       key: show-recents
+#       type: bool
+#       value: false
+#     notify:
+#       - "Restart Dock"
+  
+#   - name: "Finder: Show file extensions"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: AppleShowAllExtensions
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Expanded Save Dialog"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: NSNavPanelExpandedStateForSaveMode
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Expanded Print Dialog"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: PMPrintingExpandedStateForPrint
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Save to disk by default"
+#     osx_defaults:
+#       domain: NSGlobalDomain
+#       key: NSDocumentSaveNewDocumentsToCloud
+#       type: bool
+#       value: false
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Printer: Quit when finished"
+#     osx_defaults:
+#       domain: com.apple.print.PrintingPrefs
+#       key: Quit When Finished
+#       type: bool
+#       value: true
+  
+#   - name: "Finder: Show path bar"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: ShowPathbar
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Show Status bar"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: ShowStatusBar
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: New window target"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: NewWindowTarget
+#       type: string
+#       value: PfHm
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Set new window target path"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: NewWindowTargetPath
+#       type: string
+#       value: file:///Users/cpressland
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Allow text selection in QuickLook"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: QLEnableTextSelection
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Disable .DS_Store files on Network Volumes"
+#     osx_defaults:
+#       domain: com.apple.desktopservices
+#       key: DSDontWriteNetworkStores
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Disable .DS_Store files on USB Volumes"
+#     osx_defaults:
+#       domain: com.apple.desktopservices
+#       key: DSDontWriteUSBStores
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Use List view by default"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: FXPreferredViewStyle
+#       type: string
+#       value: Nlsv
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Search Current Directory by default"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: FXDefaultSearchScope
+#       type: string
+#       value: SCcf
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Empty Trash after 30 days"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: FXRemoveOldTrashItems
+#       type: bool
+#       value: true
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Finder: Disable file extension change warning"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: FXEnableExtensionChangeWarning
+#       type: bool
+#       value: false
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Desktop: Hide all icons"
+#     osx_defaults:
+#       domain: com.apple.finder
+#       key: CreateDesktop
+#       type: bool
+#       value: false
+#     notify:
+#       - "Restart Finder"
+  
+#   - name: "Trackpad: Table Three Finger Drag"
+#     osx_defaults:
+#       domain: com.apple.AppleMultitouchTrackpad
+#       key: TrackpadThreeFingerDrag
+#       type: bool
+#       value: true
+  
+#   - name: "Safari: Show full URL"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: ShowFullURLInSmartSearchField
+#       type: bool
+#       value: true
+  
+#   - name: "Safari: Disable AutoFill"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: "{{ item }}"
+#       type: bool
+#       value: false
+#     loop:
+#       - AutoFillPasswords
+#       - AutoFillCreditCardData
+#       - AutoFillFromAddressBook
+#       - AutoFillMiscellaneousForms
+  
+#   - name: "Safari: Disable Search Preload"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: PreloadTopHit
+#       type: bool
+#       value: false
+  
+#   - name: "Safari: Disable Favourites under Search"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: ShowFavoritesUnderSmartSearchField
+#       type: bool
+#       value: false
+  
+#   - name: "Safari: Show Develop menu"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: IncludeDevelopMenu
+#       type: bool
+#       value: true
+  
+#   - name: "Safari: Enable Developer extras"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: WebKitDeveloperExtrasEnabledPreferenceKey
+#       type: bool
+#       value: true
+  
+#   - name: "Safari: Disable Auto Open Downloads"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: AutoOpenSafeDownloads
+#       type: bool
+#       value: false
+  
+#   - name: "Safari: Close tabs after a month"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: CloseTabsAutomatically
+#       type: int
+#       value: 3
+  
+#   - name: "Safari: Delete history after 1 year"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: HistoryAgeInDaysLimit
+#       type: int
+#       value: 365
+  
+#   - name: "Safari: Improve Find on Page"
+#     osx_defaults:
+#       domain: com.apple.Safari
+#       key: FindOnPageMatchesWordStartsOnly
+#       type: bool
+#       value: false
+  
+#   - name: "Activity Monitor: Show all processes"
+#     osx_defaults:
+#       domain: com.apple.ActivityMonitor
+#       key: ShowCategory
+#       type: int
+#       value: 0
+  
+#   - name: "Spotlight: Simplify Search Results"
+#     osx_defaults:
+#       domain: com.apple.spotlight
+#       key: orderedItems
+#       type: array
+#       value:
+#         - '{"enabled" = 1;"name" = "APPLICATIONS";}'
+#         - '{"enabled" = 1;"name" = "SYSTEM_PREFS";}'
+#         - '{"enabled" = 1;"name" = "DIRECTORIES";}'
+#         - '{"enabled" = 1;"name" = "PDF";}'
+#         - '{"enabled" = 1;"name" = "FONTS";}'
+#         - '{"enabled" = 0;"name" = "DOCUMENTS";}'
+#         - '{"enabled" = 0;"name" = "MESSAGES";}'
+#         - '{"enabled" = 0;"name" = "CONTACT";}'
+#         - '{"enabled" = 0;"name" = "EVENT_TODO";}'
+#         - '{"enabled" = 0;"name" = "IMAGES";}'
+#         - '{"enabled" = 0;"name" = "BOOKMARKS";}'
+#         - '{"enabled" = 0;"name" = "MUSIC";}'
+#         - '{"enabled" = 0;"name" = "MOVIES";}'
+#         - '{"enabled" = 0;"name" = "PRESENTATIONS";}'
+#         - '{"enabled" = 0;"name" = "SPREADSHEETS";}'
+#         - '{"enabled" = 0;"name" = "SOURCE";}'
+#         - '{"enabled" = 0;"name" = "MENU_DEFINITION";}'
+#         - '{"enabled" = 0;"name" = "MENU_OTHER";}'
+#         - '{"enabled" = 0;"name" = "MENU_CONVERSION";}'
+#         - '{"enabled" = 0;"name" = "MENU_EXPRESSION";}'
+#         - '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}'
+#         - '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'

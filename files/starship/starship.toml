@@ -1,0 +1,158 @@
+# Changing palette requires changing the colour of $colour_bg_username in the shell config
+# to match that of the chosen palette. This ensures the transient prompt colours match.
+palette = 'raven'
+
+format = """
+$username\
+[](fg:colour_bg_username bg:colour_bg_directory)\
+$directory\
+[](fg:colour_bg_directory bg:colour_bg_transition)\
+([](fg:colour_bg_transition bg:colour_bg_git_branch)\
+$git_branch\
+[](fg:colour_bg_git_branch bg:colour_bg_transition))\
+([](fg:colour_bg_transition bg:colour_bg_golang)\
+$golang\
+[](fg:colour_bg_golang bg:colour_bg_transition))\
+([](fg:colour_bg_transition bg:colour_bg_python)\
+$python\
+[](fg:colour_bg_python bg:colour_bg_transition))\
+([](fg:colour_bg_transition bg:colour_bg_rust)\
+$rust\
+[](fg:colour_bg_rust bg:colour_bg_transition))\
+$docker_context\
+([](fg:colour_bg_transition bg:colour_bg_git_status)\
+$git_status\
+[](fg:colour_bg_git_status bg:colour_bg_transition))\
+[ ](fg:colour_bg_transition)\
+$fill\
+$cmd_duration\
+$time\
+$line_break\
+$character\
+"""
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+[fill]
+symbol = ' '
+style = ''
+
+[username]
+show_always = true
+style_user = 'bg:colour_bg_username'
+style_root = 'bg:colour_bg_username'
+format = '[](colour_bg_username)[]($style)'
+disabled = false
+
+[directory]
+style = 'bg:colour_bg_directory'
+format = '[ $path]($style)'
+fish_style_pwd_dir_length = 1  # Doesn't work atm, but maybe one day.
+truncation_length = 3
+truncation_symbol = '…/'
+
+[directory.substitutions]
+'Documents' = '󰈙 '
+'Downloads' = ' '
+'Music' = ' '
+'Pictures' = ' '
+
+[docker_context]
+symbol = ' '
+style = 'bg:#06969A'
+format = '[ $symbol $context]($style)'
+disabled = true
+
+[git_branch]
+symbol = ''
+style = 'bg:colour_bg_git_branch'
+format = '[ $symbol $branch]($style)'
+
+[git_status]
+style = 'bg:colour_bg_git_status'
+format = '[( $all_status)( $ahead_behind)]($style)'
+conflicted = '[=](bold fg:colour_fg_git_status_conflict bg:colour_bg_git_status'
+ahead = '[⇡${count}](bold fg:colour_fg_git_status_dirty bg:colour_bg_git_status)'
+behind = '[⇣${count}](bold fg:colour_fg_git_status_dirty bg:colour_bg_git_status)'
+diverged = '[⇕⇡${ahead_count}⇣${behind_count}](bold fg:colour_fg_git_status_conflict bg:colour_bg_git_status)'
+up_to_date = '[✓](bold fg:colour_fg_git_status_clean bg:colour_bg_git_status)'
+untracked = '[?](bold fg:colour_fg_git_status_conflict bg:colour_bg_git_status)'
+stashed = '[$](bold fg:colour_fg_git_status_dirty bg:colour_bg_git_status)'
+modified = '[!](bold fg:colour_fg_git_status_dirty bg:colour_bg_git_status)'
+staged = '[+\($count\)](bold fg:colour_fg_git_status_dirty bg:colour_bg_git_status)'
+renamed = '[»](bold fg:colour_fg_git_status_dirty bg:colour_bg_git_status)'
+deleted = '[✘](bold fg:colour_fg_git_status_conflict bg:colour_bg_git_status)'
+
+[golang]
+symbol = ''
+style = 'bg:colour_bg_golang'
+format = '[ $symbol ($version)]($style)'
+
+[python]
+symbol = ''
+style = 'bg:colour_bg_python'
+format = '[ $symbol( $version)( \[$virtualenv\])]($style)'
+
+[rust]
+symbol = ''
+style = 'bg:colour_bg_rust'
+format = '[ $symbol( $version)]($style)'
+
+[time]
+disabled = false
+time_format = '%R' # Hour:Minute Format
+style = 'bold black'
+format = '[ $time ]($style)'
+
+[cmd_duration]
+min_time = 1
+show_milliseconds = true
+format = '[$duration]($style)'
+style = 'bold black'
+
+
+# Somewhat light coloured theme with blue/green hues
+[palettes.ocean]
+colour_bg_transition = '#182c40'
+colour_bg_directory = '#37617a'
+colour_bg_git_branch = '#3f8191'
+colour_bg_git_status = '#182c40'
+colour_fg_git_status_clean = '#06969A'
+colour_fg_git_status_conflict = '#c43535'
+colour_fg_git_status_dirty = '#a16000'
+colour_bg_username = '#182c40'
+colour_bg_golang = '#2c7069'
+colour_bg_python = '#2c7069'
+colour_bg_rust = '#91483c'
+
+
+# Darker theme with blue/purple hues
+[palettes.raven]
+colour_bg_transition = '#0c121c'
+colour_bg_directory = '#1c1636'
+colour_bg_git_branch = '#161b36'
+colour_bg_git_status = '#162336'
+colour_fg_git_status_clean = '#06969A'
+colour_fg_git_status_conflict = '#c43535'
+colour_fg_git_status_dirty = '#a16000'
+colour_bg_username = '#0c121c'
+colour_bg_golang = '#004851'
+colour_bg_python = '#003624'
+colour_bg_rust = '#4a1506'
+
+
+# Basic bitch black
+[palettes.black]
+colour_bg_transition = '#1a1a24'
+colour_bg_directory = '#08080a'
+colour_bg_git_branch = '#08080a'
+colour_bg_git_status = '#08080a'
+colour_fg_git_status_clean = '#06969A'
+colour_fg_git_status_conflict = '#c43535'
+colour_fg_git_status_dirty = '#a16000'
+colour_bg_username = '#1a1a24'
+colour_bg_golang = '#004851'
+colour_bg_python = '#003624'
+colour_bg_rust = '#4a1506'
+

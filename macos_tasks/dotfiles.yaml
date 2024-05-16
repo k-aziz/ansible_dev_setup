@@ -1,0 +1,38 @@
+---
+  - name: Setup Dotfile Directories
+    file:
+      path: "{{ item }}"
+      state: directory
+      mode: 0700
+    loop:
+      - ~/.config
+      - ~/.config/fish
+      - ~/.config/nvim
+      - ~/.config/omf
+      - ~/.config/wezterm
+      # - ~/.ssh
+  
+  - name: Copy Config Files
+    copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      mode: 0600
+    loop:
+      - src: fish/config.fish
+        dest: ~/.config/fish/config.fish
+      - src: nvim/init.vim
+        dest: ~/.config/nvim/init.vim
+      - src: omf/channel
+        dest: ~/.config/omf/channel
+      - src: omf/bundle
+        dest: ~/.config/omf/bundle
+      - src: omf/theme
+        dest: ~/.config/omf/theme
+      - src: wezterm/wezterm.lua
+        dest: ~/.config/wezterm/wezterm.lua
+      # - src: git/gitconfig
+      #   dest: ~/.gitconfig
+      # - src: ssh/config
+      #   dest: ~/.ssh/config
+      # - src: starship/starship.toml
+      #   dest: ~/.config/starship.toml

@@ -1,0 +1,54 @@
+---
+
+- name: Set Up Hosts
+  hosts: all
+  become: false
+  environment:
+    PATH: "/opt/homebrew/bin:/opt/homebrew/sbin:{{ lookup('env', 'PATH') }}"
+  vars_files:
+    - vars.yaml
+  tasks:    
+    - when: ansible_os_family == "Darwin"
+      block:
+        - name: Install Homebrew Packages
+          ansible.builtin.include_tasks: macos_tasks/homebrew.yaml
+          when: install_homebrew_packages
+
+        - name: Register Fish Variables
+          block:
+          - name: Setting Package Install Path For Non-arm64
+            ansible.builtin.set_fact:
+              install_path: /usr/local/bin/
+            when: ansible_architecture != "arm64"
+
+          - name: Setting Package Install Path For arm64
+            ansible.builtin.set_fact:
+              install_path: /opt/homebrew/bin
+            when: ansible_architecture == "arm64"
+
+          - name: Ensure Fish Is Installed
+            ansible.builtin.stat:
+              path: "{{ install_path }}/fish"
+            register: fish_is_installed
+
+        - name: Install OhMyFish
+          ansible.builtin.include_tasks: macos_tasks/omf.yaml
+          when: # Will remove one once I decide which to stick with
+            - fish_is_installed
+            - install_omf
+            - not install_fisher_plugins
+        
+        - name: Install Fisher Plugins
+          ansible.builtin.include_tasks: macos_tasks/fisher.yaml
+          when: 
+            - fish_is_installed
+            - install_fisher_plugins
+            - not install_omf
+
+        - name: Install System Default Overrides
+          ansible.builtin.include_tasks: macos_tasks/defaults.yaml
+          when: setup_system_defaults
+
+        - name: Install dotfiles
+          ansible.builtin.include_tasks: macos_tasks/dotfiles.yaml
+          when: setup_dotfiles

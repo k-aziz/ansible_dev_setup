@@ -1,0 +1,34 @@
+install_missing_homebrew: true
+install_homebrew_packages: true
+install_fisher_plugins: true
+install_omf: false
+setup_system_defaults: false
+setup_dotfiles: true
+
+homebrew_taps:
+  - homebrew/bundle
+  - homebrew/cask-fonts
+
+homebrew_cask_packages:
+  - wezterm
+
+homebrew_packages:
+  - bat
+  - eza
+  - fish
+  - fd
+  - font-ubuntu-mono-nerd-font
+  - fzf
+  - neovim
+  - pipenv
+  - poetry
+  - postgresql@16
+  - rabbitmq
+  - redis
+  - rust
+  - virtualenv
+
+
+fisher_plugins:
+  - jethrokuan/z
+  - PatrickF1/fzf.fish
