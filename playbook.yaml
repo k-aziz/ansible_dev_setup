@@ -30,13 +30,6 @@
             ansible.builtin.stat:
               path: "{{ install_path }}/fish"
             register: fish_is_installed
-
-        - name: Install OhMyFish
-          ansible.builtin.include_tasks: macos_tasks/omf.yaml
-          when: # Will remove one once I decide which to stick with
-            - fish_is_installed
-            - install_omf
-            - not install_fisher_plugins
         
         - name: Install Fisher Plugins
           ansible.builtin.include_tasks: macos_tasks/fisher.yaml
