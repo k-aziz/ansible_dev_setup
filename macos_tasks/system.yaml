@@ -7,7 +7,7 @@
       value: true
     notify:
       - "Restart Dock"
-  
+
   - name: "Dock: Unhide Immediately"
     osx_defaults:
       domain: com.apple.dock
@@ -16,7 +16,7 @@
       value: 0
     notify:
       - "Restart Dock"
-  
+
   - name: "Dock: Set icon size"
     community.general.osx_defaults:
       domain: com.apple.dock
@@ -25,7 +25,7 @@
       value: 36
     notify:
       - "Restart Dock"
-  
+
   - name: "Finder: Show file extensions"
     osx_defaults:
       domain: com.apple.finder
@@ -34,7 +34,7 @@
       value: true
     notify:
       - "Restart Finder"
-  
+
   - name: "Finder: Show hidden files"
     osx_defaults:
       domain: com.apple.finder
@@ -52,7 +52,7 @@
       value: true
     notify:
       - "Restart Finder"
-  
+
   - name: "Finder: Expanded Save Dialog"
     osx_defaults:
       domain: NSGlobalDomain
@@ -61,7 +61,7 @@
       value: true
     notify:
       - "Restart Finder"
-  
+
   - name: "Finder: Expanded Print Dialog"
     osx_defaults:
       domain: NSGlobalDomain
@@ -70,7 +70,7 @@
       value: true
     notify:
       - "Restart Finder"
-  
+
   - name: "Finder: Save to disk by default"
     osx_defaults:
       domain: NSGlobalDomain
@@ -79,7 +79,7 @@
       value: false
     notify:
       - "Restart Finder"
-  
+
   - name: "Finder: Show path bar"
     osx_defaults:
       domain: com.apple.finder
@@ -88,7 +88,7 @@
       value: true
     notify:
       - "Restart Finder"
-  
+
   - name: "Finder: Show Status bar"
     osx_defaults:
       domain: com.apple.finder
@@ -97,7 +97,7 @@
       value: true
     notify:
       - "Restart Finder"
-  
+
   - name: "Finder: Disable .DS_Store files on USB Volumes"
     osx_defaults:
       domain: com.apple.desktopservices
@@ -106,7 +106,7 @@
       value: true
     notify:
       - "Restart Finder"
-  
+
   - name: "Finder: Disable file extension change warning"
     osx_defaults:
       domain: com.apple.finder
@@ -115,11 +115,18 @@
       value: false
     notify:
       - "Restart Finder"
-  
+
   - name: "Trackpad: Table Three Finger Drag"
     osx_defaults:
       domain: com.apple.AppleMultitouchTrackpad
       key: TrackpadThreeFingerDrag
       type: bool
       value: true
+
+  - name: "Cursor: Reduce Key Repeat Delay"
+    osx_defaults:
+      domain: NSGlobalDomain
+      key: KeyRepeat
+      type: int
+      value: 0
   
