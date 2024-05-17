@@ -45,3 +45,8 @@
         - name: Install dotfiles
           ansible.builtin.include_tasks: macos_tasks/dotfiles.yaml
           when: setup_dotfiles
+
+        - name: Install Nvim Plugins
+          ansible.builtin.include_tasks: macos_tasks/nvim.yaml
+          when: install_nvim_plugins
+

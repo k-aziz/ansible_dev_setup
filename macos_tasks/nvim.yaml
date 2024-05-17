@@ -1,0 +1,11 @@
+---
+
+  - name: Installing LazyVim 
+    ansible.builtin.git: 
+      repo: https://github.com/LazyVim/starter
+      dest: ~/.config/nvim   
+
+  - name: Cleaning Up LazyVim Installation 
+    file:
+      path: ~/.config/nvim/.git
+      state: absent
