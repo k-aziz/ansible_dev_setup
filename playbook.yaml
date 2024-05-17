@@ -36,7 +36,6 @@
           when: 
             - fish_is_installed
             - install_fisher_plugins
-            - not install_omf
 
         - name: Install System Default Overrides
           ansible.builtin.include_tasks: macos_tasks/defaults.yaml

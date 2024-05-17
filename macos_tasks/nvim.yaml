@@ -1,9 +1,9 @@
 ---
-
   - name: Installing LazyVim 
     ansible.builtin.git: 
       repo: https://github.com/LazyVim/starter
-      dest: ~/.config/nvim   
+      dest: ~/.config/nvim
+      creates: ~/.config/nvim/init.lua
 
   - name: Cleaning Up LazyVim Installation 
     file:

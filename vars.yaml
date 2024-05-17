@@ -1,8 +1,7 @@
 install_missing_homebrew: true
 install_homebrew_packages: true
 install_fisher_plugins: true
-install_omf: false
-setup_system_defaults: false
+setup_system_defaults: true
 setup_dotfiles: true
 
 homebrew_taps:
@@ -27,7 +26,6 @@ homebrew_packages:
   - redis
   - rust
   - virtualenv
-
 
 fisher_plugins:
   - jethrokuan/z
