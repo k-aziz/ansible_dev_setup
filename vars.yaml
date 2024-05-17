@@ -1,22 +1,22 @@
 install_missing_homebrew: true
 install_homebrew_packages: true
 install_fisher_plugins: true
+install_nvim_plugins: true
 setup_system_defaults: true
 setup_dotfiles: true
 
 homebrew_taps:
   - homebrew/bundle
-  - homebrew/cask-fonts
 
 homebrew_cask_packages:
   - wezterm
+  - font-ubuntu-mono-nerd-font
 
 homebrew_packages:
   - bat
   - eza
   - fish
   - fd
-  - font-ubuntu-mono-nerd-font
   - fzf
   - neovim
   - pipenv
