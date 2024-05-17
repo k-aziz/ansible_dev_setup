@@ -7,6 +7,11 @@
     PATH: "/opt/homebrew/bin:/opt/homebrew/sbin:{{ lookup('env', 'PATH') }}"
   vars_files:
     - vars.yaml
+  handlers:
+    - name: "Restart Dock"
+      shell: "killall Dock"
+    - name: "Restart Finder"
+      shell: "killall Finder"
   tasks:    
     - when: ansible_os_family == "Darwin"
       block:
@@ -38,7 +43,7 @@
             - install_fisher_plugins
 
         - name: Install System Default Overrides
-          ansible.builtin.include_tasks: macos_tasks/defaults.yaml
+          ansible.builtin.include_tasks: macos_tasks/system.yaml
           when: setup_system_defaults
 
         - name: Install dotfiles

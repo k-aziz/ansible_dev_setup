@@ -1,11 +1,28 @@
 ---
+  - name: Checking If NVim Config Already Exists
+    ansible.builtin.stat:
+      path: "{{ item }}"
+    loop:
+      - "~/.config/nvim/init.lua"
+      - "~/.config/nvim/init.vim"
+    register: nvim_files_exist
+
+  - name: Setting nvim_conf_exists
+    ansible.builtin.set_fact:
+      nvim_conf_exists: "{{ nvim_files_exist.results | map(attribute='stat.exists') | list is any }}"
+
+  - name: Value Of nvim_conf_exists
+    debug:
+      msg: "{{ nvim_conf_exists }}" 
+
   - name: Installing LazyVim 
     ansible.builtin.git: 
       repo: https://github.com/LazyVim/starter
       dest: ~/.config/nvim
-      creates: ~/.config/nvim/init.lua
+    when: not nvim_conf_exists
 
   - name: Cleaning Up LazyVim Installation 
     file:
       path: ~/.config/nvim/.git
       state: absent
+    when: not nvim_conf_exists
