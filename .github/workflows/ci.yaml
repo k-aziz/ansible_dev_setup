@@ -1,0 +1,40 @@
+name: CI
+run-name: ${{ github.actor }} is Running CI Actions
+on: 
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  integration:
+    runs-on: macos-14
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v4
+
+      - name: Uninstall built-in Homebrew
+        run: |
+          curl -sLO https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh
+          chmod +x ./uninstall.sh
+          sudo ./uninstall.sh --force
+          sudo rm -rf /usr/local/Homebrew
+          sudo rm -rf /usr/local/Caskroom
+          sudo rm -rf /usr/local/bin/brew
+          sudo rm -rf /opt/homebrew/bin
+
+      - name: Uninstall built-in firefox.
+        run: |
+          sudo rm -rf /Applications/Firefox.app
+          sudo rm -rf /usr/local/bin/firefox
+
+      - name: Install dependencies
+        run: |
+          sudo pip3 install --upgrade pip 
+          sudo pip3 install ansible
+
+      - name: Test playbook syntax
+        run: ansible-playbook -i inventory.ini -l local main.yaml --syntax-check
+
+      - name: Test playbook
+        run: ansible-playbook -i inventory.ini -l local main.yaml
