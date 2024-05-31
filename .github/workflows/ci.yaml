@@ -1,6 +1,5 @@
-name: CI
-run-name: ${{ github.actor }} is Running CI Actions
-on: 
+name: Run CI
+on:
   pull_request:
   push:
     branches:
@@ -8,7 +7,12 @@ on:
 
 jobs:
   integration:
-    runs-on: macos-14
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - macos-14
+          - macos-13
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v4
