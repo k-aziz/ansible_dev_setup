@@ -20,7 +20,7 @@
     when:
       - not homebrew_check.stat.exists
       - not install_missing_homebrew
-    
+
   - name: Getting Host Username
     local_action: command whoami
     register: username_on_the_host
@@ -45,12 +45,12 @@
     when:
       - not homebrew_check.stat.exists
       - install_missing_homebrew
-  
+
   - name: Checking If Sudoer File Was Created
     ansible.builtin.stat:
       path: "/etc/sudoers.d/ansible"
     register: sudoer_file_check
-  
+
   - name: Removing Host User From Passwordless Sudoers
     become: true
     file:
@@ -63,7 +63,7 @@
     register: brew_doctor
     ignore_errors: true
     when: homebrew_check.stat.exists or installation_result is succeeded
-  
+
   - name: Reporting Homebrew Doctor Output
     debug:
       msg: "{{ brew_doctor.stdout }}"
@@ -72,24 +72,26 @@
     homebrew_tap:
       name: "{{ homebrew_taps }}"
       state: present
-    when: homebrew_check.stat.exists
-  
+    when: homebrew_check.stat.exists or installation_result is succeeded
+ 
   - name: Installing Homebrew Cask Packages
     homebrew_cask:
       name: "{{ homebrew_cask_packages }}"
       state: present
       install_options: "appdir={{ homebrew_cask_dir }}"
-    when: homebrew_check.stat.exists
+    when: homebrew_check.stat.exists or installation_result is succeeded
   
   - name: Installing Homebrew Packages
     homebrew:
       name: "{{ homebrew_packages }}"
       state: present
-    when: homebrew_check.stat.exists
+    when: homebrew_check.stat.exists or installation_result is succeeded
 
   - name: Install dockutil.
     community.general.homebrew:
       name: dockutil
       state: present
-    when: setup_dock
+    when:
+      - homebrew_check.stat.exists or installation_result is succeeded
+      - setup_dock
 
