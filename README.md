@@ -1,5 +1,8 @@
 # Ansible MacOS Setup
 
+[![MIT license][badge-license]][link-license]
+[![CI][badge-gh-actions]][link-gh-actions]
+
 Sets up MacOS machines with my preferred apps and configurations. Can be run from a Control node to apply to multiple
 hosts or standalone to set up a single machine.
 
@@ -34,17 +37,15 @@ The following variables in var.yaml can be changed if not all features are requi
 
 - Install Ansible.
 
-`brew install ansible`
+`python3 -m pip install ansible`
 
 - Add local IP address of each host node to the inventory.ini config file under [myhosts]
+
+- [Generate SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if required.
 
 - Copy SSH key to each host using `ssh-copy-id`:
 
 `ssh-copy-id {{username}}@{{host_address}}`
-
-- Install required Ansible roles:
-
-`ansible-galaxy install -r requirements.yml`
 
 - Check connections with:
 
@@ -55,3 +56,8 @@ The following variables in var.yaml can be changed if not all features are requi
 `ansible-playbook -i inventory.ini -l myhosts playbook.yaml -K`
 
 If you do not need ansible to install homebrew the `-K` flag can be ommitted and no sudo password will be required.
+
+[badge-gh-actions]: https://github.com/k-aziz/ansible_dev_setup/actions/workflows/ci.yaml/badge.svg?event=push
+[link-gh-actions]: https://github.com/k-aziz/ansible_dev_setup/actions/workflows/ci.yaml
+[badge-license]: https://img.shields.io/github/license/k-aziz/ansible_dev_setup
+[link-license]: https://github.com/k-aziz/ansible_dev_setup/blob/main/LICENSE
