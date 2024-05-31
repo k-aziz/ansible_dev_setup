@@ -35,6 +35,11 @@ jobs:
 
       - name: Test playbook syntax
         run: ansible-playbook -i inventory.ini -l local main.yaml --syntax-check
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
 
       - name: Test playbook
         run: ansible-playbook -i inventory.ini -l local main.yaml
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
+
