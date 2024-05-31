@@ -77,11 +77,19 @@
   - name: Installing Homebrew Cask Packages
     homebrew_cask:
       name: "{{ homebrew_cask_packages }}"
-      state: latest
+      state: present
+      install_options: "appdir={{ homebrew_cask_dir }}"
     when: homebrew_check.stat.exists
   
   - name: Installing Homebrew Packages
     homebrew:
       name: "{{ homebrew_packages }}"
-      state: latest
+      state: present
     when: homebrew_check.stat.exists
+
+  - name: Install dockutil.
+    community.general.homebrew:
+      name: dockutil
+      state: present
+    when: setup_dock
+

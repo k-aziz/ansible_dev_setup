@@ -2,15 +2,22 @@ install_missing_homebrew: true
 install_homebrew_packages: true
 install_fisher_plugins: true
 install_nvim_plugins: true
-setup_system_defaults: true
+setup_dock: true
 setup_dotfiles: true
+setup_system_defaults: true
 
 homebrew_taps:
   - homebrew/bundle
 
+# Defaults to User scope for non-admin systems
+homebrew_cask_dir: "~/Applications"
 homebrew_cask_packages:
-  - wezterm
+  - docker
+  - firefox
   - font-ubuntu-mono-nerd-font
+  - obsidian
+  - visual-studio-code
+  - wezterm
 
 homebrew_packages:
   - bat
@@ -30,3 +37,26 @@ homebrew_packages:
 fisher_plugins:
   - jethrokuan/z
   - PatrickF1/fzf.fish
+
+
+dockitems_remove:
+  - Launchpad
+  - TV
+  - Podcasts
+  - 'App Store'
+
+dockitems_persist:
+  - name: Mail
+    path: "/Applications/Mail.app/"
+
+  - name: Firefox
+    path: "~/Applications/Firefox.app/"
+    pos: 2
+  
+  - name: Visual Studio Code
+    path: "~/Applications/VisualStudioCode.app"
+    pos: 3
+  
+  - name: Obsidian
+    path: "~/Applications/Obsidian.app"
+    pos: 4

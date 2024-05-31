@@ -1,30 +1,57 @@
 ---  
-  - name: "Dock: Autohide"
-    osx_defaults:
-      domain: com.apple.dock
-      key: autohide
-      type: bool
-      value: true
-    notify:
-      - "Restart Dock"
 
-  - name: "Dock: Unhide Immediately"
-    osx_defaults:
-      domain: com.apple.dock
-      key: autohide-delay
-      type: float
-      value: 0
-    notify:
-      - "Restart Dock"
+  - when: setup_dock
+    block:
+    - name: "Dock: Autohide"
+      osx_defaults:
+        domain: com.apple.dock
+        key: autohide
+        type: bool
+        value: true
+      notify:
+        - "Restart Dock"
 
-  - name: "Dock: Set icon size"
-    community.general.osx_defaults:
-      domain: com.apple.dock
-      key: tilesize
-      type: int
-      value: 36
-    notify:
-      - "Restart Dock"
+    - name: "Dock: Unhide Immediately"
+      osx_defaults:
+        domain: com.apple.dock
+        key: autohide-delay
+        type: float
+        value: 0
+      notify:
+        - "Restart Dock"
+
+    - name: "Dock: Set icon size"
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: tilesize
+        type: int
+        value: 36
+      notify:
+        - "Restart Dock"
+
+    - name: "Dock: Don't show recent apps"
+      osx_defaults:
+        domain: com.apple.dock
+        key: show-recents
+        type: bool
+        value: false
+      notify:
+        - "Restart Dock"
+
+    - name: Remove Dock Items
+      ansible.builtin.include_tasks: macos_tasks/dock/remove.yaml
+      loop: "{{ dockitems_remove }}"
+
+    - name: Add Dock Items
+      ansible.builtin.include_tasks: macos_tasks/dock/add.yaml
+      loop: "{{ dockitems_persist }}"
+
+    - name: Set Dock Item Position
+      ansible.builtin.include_tasks: macos_tasks/dock/position.yaml
+      loop: "{{ dockitems_persist }}"
+      when:
+        - item.pos is defined
+        - item.pos > 0
 
   - name: "Finder: Show file extensions"
     osx_defaults:
@@ -123,10 +150,17 @@
       type: bool
       value: true
 
+  - name: "Cursor: Reduce Initial Key Repeat Delay"
+    osx_defaults:
+      domain: NSGlobalDomain
+      key: InitialKeyRepeat
+      type: int
+      value: 10
+  
   - name: "Cursor: Reduce Key Repeat Delay"
     osx_defaults:
       domain: NSGlobalDomain
       key: KeyRepeat
       type: int
-      value: 0
+      value: 1
   

@@ -3,7 +3,7 @@
 Sets up MacOS machines with my preferred apps and configurations. Can be run from a Control node to apply to multiple
 hosts or standalone to set up a single machine.
 
-# Configuration Options
+## Configuration Options
 
 The following variables in var.yaml can be changed if not all features are required.
 
@@ -11,22 +11,26 @@ The following variables in var.yaml can be changed if not all features are requi
 
 `install_homebrew_packages` - Installs brew packages listed in vars.yaml.
 
-`setup_system_defaults` - Sets OSX default behaviours.
+`install_fisher_plugins` - Installs plugins for the Fish shell using Fisherman.
+
+`install_nvim_plugins` - Install plugins for the neovim text editor.
+
+`setup_dock` - Configure Dock size and app positions.
 
 `setup_dotfiles` - Copies dotfiles in files directory and applies custom configurations.
 
+`setup_system_defaults` - Sets OSX default behaviours.
 
-# Using Control Node/Running On Multiple Hosts
+## Using Control Node/Running On Multiple Hosts
 
-## On Hosts (MacOS)
+### On Hosts (MacOS)
 
 - Allow Remote Login via Settings > General > Sharing > Remote Login.
 - Ensure each host has x-code developer tools installed.
 
 `xcode-select --install`
 
-
-## On Control Node
+### On Control Node
 
 - Install Ansible.
 
@@ -38,6 +42,10 @@ The following variables in var.yaml can be changed if not all features are requi
 
 `ssh-copy-id {{username}}@{{host_address}}`
 
+- Install required Ansible roles:
+
+`ansible-galaxy install -r requirements.yml`
+
 - Check connections with:
 
 `ansible myhosts -m ping -i inventory.ini`
@@ -45,6 +53,5 @@ The following variables in var.yaml can be changed if not all features are requi
 - Run the playbook
 
 `ansible-playbook -i inventory.ini -l myhosts playbook.yaml -K`
-
 
 If you do not need ansible to install homebrew the `-K` flag can be ommitted and no sudo password will be required.
