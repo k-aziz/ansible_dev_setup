@@ -15,8 +15,11 @@
 
 - name: Ensure Dock item {{ item.name | default(item) }} exists.
   ansible.builtin.command: "dockutil --add '{{ item.path }}' --label '{{ item.name }}'"
-  retries: 3
-  delay: 2
-  when: dockitem_exists.rc > 0 or
+  when: dockitem_exists.rc >0 or
         dockitem_exists.rc == 0 and current_section == 'recent-apps'
 
+- name: Pause for 7 seconds between dock changes.
+  ansible.builtin.pause:
+    seconds: 7
+  when: dockitem_exists.rc >0 or
+        dockitem_exists.rc == 0 and current_section == 'recent-apps'

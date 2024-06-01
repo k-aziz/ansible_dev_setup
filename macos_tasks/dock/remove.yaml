@@ -13,8 +13,13 @@
   - name: Ensure Dock item {{ item }} is removed.
     ansible.builtin.command:
       cmd: dockutil --remove '{{ item }}'
-    retries: 3
-    delay: 2
     when: dockitem_exists.rc  == 0
     tags: ['dock']
+
+  - name: Pause for 7 seconds between dock changes.
+    ansible.builtin.pause:
+      seconds: 7
+    when: dockitem_exists.rc == 0
+    tags: ['dock']
+
 
