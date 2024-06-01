@@ -42,7 +42,6 @@ fisher_plugins:
 dockitems_remove:
   - Launchpad
   - TV
-  - Podcasts
   - 'App Store'
 
 dockitems_persist:
