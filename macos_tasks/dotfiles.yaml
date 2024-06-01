@@ -8,7 +8,7 @@
       - ~/.config
       - ~/.config/fish
       - ~/.config/wezterm
-      # - ~/.ssh
+      - ~/.config/git
   
   - name: Copy Config Files
     copy:
@@ -20,9 +20,9 @@
         dest: ~/.config/fish/config.fish
       - src: wezterm/wezterm.lua
         dest: ~/.config/wezterm/wezterm.lua
-      # - src: git/gitconfig
-      #   dest: ~/.gitconfig
-      # - src: ssh/config
-      #   dest: ~/.ssh/config
-      # - src: starship/starship.toml
-      #   dest: ~/.config/starship.toml
+      - src: git/config
+        dest: ~/.config/git/config
+      - src: starship/starship.toml
+        dest: ~/.config/starship.toml
+      - src: starship/starship_pointy.toml
+        dest: ~/.config/starship_pointy.toml
