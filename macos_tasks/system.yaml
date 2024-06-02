@@ -41,17 +41,26 @@
     - name: Remove Dock Items
       ansible.builtin.include_tasks: macos_tasks/dock/remove.yaml
       loop: "{{ dockitems_remove }}"
+      loop_control:
+        extended: true
+        extended_allitems: false
 
     - name: Add Dock Items
       ansible.builtin.include_tasks: macos_tasks/dock/add.yaml
       loop: "{{ dockitems_persist }}"
+      loop_control:
+        extended: true
+        extended_allitems: false
 
     - name: Set Dock Item Position
       ansible.builtin.include_tasks: macos_tasks/dock/position.yaml
       loop: "{{ dockitems_persist }}"
+      loop_control:
+        extended: true
+        extended_allitems: false
       when:
-        - item.pos is defined
-        - item.pos > 0
+          - item.pos is defined
+          - item.pos > 0
 
   - name: "Finder: Show file extensions"
     osx_defaults:

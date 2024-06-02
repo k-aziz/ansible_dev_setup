@@ -38,7 +38,9 @@
       - not homebrew_check.stat.exists
 
   - name: Installing Homebrew
-    shell: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    shell: |
+      NONINTERACTIVE=1 /bin/bash -c
+      "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     args:
       creates: "{{ homebrew_path }}"
     register: installation_result
