@@ -59,18 +59,18 @@ dockitems_remove:
 
 dockitems_persist:
   - name: Mail
-    path: "/Applications/Mail.app/"
+    path: "/Applications/Mail.app"
 
-  - name: Wezterm
-    path: "~/Applications/Wezterm.app/"
+  - name: WezTerm
+    path: "~/Applications/WezTerm.app"
     pos: 2
  
   - name: Firefox
-    path: "~/Applications/Firefox.app/"
+    path: "~/Applications/Firefox.app"
     pos: 3
   
-  - name: Visual Studio Code
-    path: "~/Applications/'Visual Studio Code.app'"
+  - name: VS Code
+    path: "~/Applications/Visual Studio Code.app"
     pos: 4
   
   - name: Obsidian

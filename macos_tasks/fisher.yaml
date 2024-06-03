@@ -1,5 +1,10 @@
 ---
 
+  - name: Ensure Fish Is Installed
+    ansible.builtin.stat:
+      path: "{{ install_path }}/fish"
+    register: fish_is_installed
+
   - name: Installing Fisherman
     shell: 
       curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | 
@@ -7,9 +12,11 @@
     args:
       executable: "{{ install_path }}/fish"
       creates: ~/.config/fish/fish_plugins
+    when: fish_is_installed
 
   - name: Installing Fisher Plugins
     shell: fisher install {{ item }}
     args:
       executable: "{{ install_path }}/fish"
     with_items: "{{ fisher_plugins }}"
+    when: fish_is_installed

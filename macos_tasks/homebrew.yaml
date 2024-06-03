@@ -1,20 +1,26 @@
 ---
+  # Always check for brew installation for tasks not tagged with `brew`
+  # that still may require installing a package with brew.
   - name: Setting HomeBrew Path For Non-arm64
+    tags: always
     ansible.builtin.set_fact:
       homebrew_path: /usr/local/bin/brew
     when: ansible_architecture != "arm64"
 
   - name: Setting HomeBrew Path For arm64
+    tags: always
     ansible.builtin.set_fact:
       homebrew_path: /opt/homebrew/bin
     when: ansible_architecture == "arm64"
 
   - name: Ensuring Homebrew Is Installed
+    tags: always
     ansible.builtin.stat:
       path: "{{ homebrew_path }}"
     register: homebrew_check
 
   - name: Fail If Homebrew Is Not Installed and install_missing_homebrew Is False
+    tags: always
     fail:
       msg: Homebrew is missing... Install from http://brew.sh/
     when:
@@ -38,7 +44,7 @@
       - not homebrew_check.stat.exists
 
   - name: Installing Homebrew
-    shell: |
+    shell: >
       NONINTERACTIVE=1 /bin/bash -c
       "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     args:
@@ -61,12 +67,14 @@
     when: sudoer_file_check.stat.exists
 
   - name: Running Homebrew Doctor
+    tags: [ never, debug ]
     shell: brew doctor
     register: brew_doctor
     ignore_errors: true
     when: homebrew_check.stat.exists or installation_result is succeeded
 
   - name: Reporting Homebrew Doctor Output
+    tags: [ never, debug ]
     debug:
       msg: "{{ brew_doctor.stdout }}"
 
@@ -91,12 +99,4 @@
       state: present
     loop: "{{ homebrew_packages }}"
     when: homebrew_check.stat.exists or installation_result is succeeded
-
-  - name: Install dockutil.
-    community.general.homebrew:
-      name: dockutil
-      state: present
-    when:
-      - homebrew_check.stat.exists or installation_result is succeeded
-      - setup_dock
 

@@ -1,6 +1,7 @@
 ---  
 
   - when: setup_dock
+    tags: dock
     block:
     - name: "Dock: Autohide"
       osx_defaults:

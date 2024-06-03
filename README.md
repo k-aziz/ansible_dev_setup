@@ -57,6 +57,16 @@ The following variables in var.yaml can be changed if not all features are requi
 
 If you do not need ansible to install homebrew the `-K` flag can be ommitted and no sudo password will be required.
 
+
+## Tags
+
+- `brew` - Installation of brew and brew packages/taps/casks.
+- `dock` - Configure the MacOS dock.
+- `dotfiles` - Copy dotfile configurations.
+- `fish` - Install fish plugins with fisherman.
+- `nvim` - Install nvim plugins.
+- `system` - System configurations such as OSX defaults. Includes `dock` tagged tasks.
+
 [badge-gh-actions]: https://github.com/k-aziz/ansible_dev_setup/actions/workflows/ci.yaml/badge.svg?event=push
 [link-gh-actions]: https://github.com/k-aziz/ansible_dev_setup/actions/workflows/ci.yaml
 [badge-license]: https://img.shields.io/github/license/k-aziz/ansible_dev_setup

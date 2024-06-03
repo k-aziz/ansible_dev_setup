@@ -12,14 +12,28 @@
       shell: "killall Dock"
     - name: "Restart Finder"
       shell: "killall Finder"
-  tasks:    
+  tasks:
     - when: ansible_os_family == "Darwin"
       block:
         - name: Install Homebrew Packages
-          ansible.builtin.include_tasks: macos_tasks/homebrew.yaml
+          tags: [ brew, dock, system ]
+          ansible.builtin.include_tasks:
+            file: macos_tasks/homebrew.yaml
+            apply:
+              tags: brew
           when: install_homebrew_packages
 
-        - name: Register Fish Variables
+        - name: Install dockutil.
+          community.general.homebrew:
+            name: dockutil
+            state: present
+          when:
+            - homebrew_check.stat.exists or installation_result is succeeded
+            - setup_dock
+          tags: [ dock, system ]
+
+        - name: Register Variables
+          tags: [ fish, nvim ]
           block:
           - name: Setting Package Install Path For Non-arm64
             ansible.builtin.set_fact:
@@ -31,26 +45,36 @@
               install_path: /opt/homebrew/bin
             when: ansible_architecture == "arm64"
 
-          - name: Ensure Fish Is Installed
-            ansible.builtin.stat:
-              path: "{{ install_path }}/fish"
-            register: fish_is_installed
-        
         - name: Install Fisher Plugins
-          ansible.builtin.include_tasks: macos_tasks/fisher.yaml
-          when: 
-            - fish_is_installed
+          tags: fish
+          ansible.builtin.include_tasks:
+            file: macos_tasks/fisher.yaml
+            apply:
+              tags: fish
+          when:
             - install_fisher_plugins
 
         - name: Install System Default Overrides
-          ansible.builtin.include_tasks: macos_tasks/system.yaml
+          tags: [ dock, system ]
+          ansible.builtin.include_tasks:
+            file: macos_tasks/system.yaml
+            apply:
+              tags: system
           when: setup_system_defaults
 
         - name: Install dotfiles
-          ansible.builtin.include_tasks: macos_tasks/dotfiles.yaml
+          tags: dotfiles
+          ansible.builtin.include_tasks:
+            file: macos_tasks/dotfiles.yaml
+            apply:
+              tags: dotfiles
           when: setup_dotfiles
 
         - name: Install Nvim Plugins
-          ansible.builtin.include_tasks: macos_tasks/nvim.yaml
+          tags: nvim
+          ansible.builtin.include_tasks:
+            file: macos_tasks/nvim.yaml
+            apply:
+              tags: nvim
           when: install_nvim_plugins
 
