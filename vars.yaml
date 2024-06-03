@@ -16,6 +16,7 @@ homebrew_cask_packages:
   - firefox
   - font-ubuntu-mono-nerd-font
   - obsidian
+  - spotify
   - visual-studio-code
   - wezterm
 
@@ -29,6 +30,7 @@ homebrew_packages:
   - pipenv
   - poetry
   - postgresql@16
+  - pyenv
   - rabbitmq
   - redis
   - rust
@@ -38,24 +40,44 @@ fisher_plugins:
   - jethrokuan/z
   - PatrickF1/fzf.fish
 
-
 dockitems_remove:
   - Launchpad
+  - Safari
+  - Messages
+  - Maps
+  - FaceTime
+  - Calendar
+  - Contacts
+  - Reminders
+  - Notes
+  - Photos
+  - Freeform
   - TV
+  - Music
+  - News
   - 'App Store'
 
 dockitems_persist:
   - name: Mail
     path: "/Applications/Mail.app/"
 
+  - name: Wezterm
+    path: "~/Applications/Wezterm.app/"
+    pos: 2
+ 
   - name: Firefox
     path: "~/Applications/Firefox.app/"
-    pos: 2
+    pos: 3
   
   - name: Visual Studio Code
-    path: "~/Applications/VisualStudioCode.app"
-    pos: 3
+    path: "~/Applications/'Visual Studio Code.app'"
+    pos: 4
   
   - name: Obsidian
     path: "~/Applications/Obsidian.app"
-    pos: 4
+    pos: 5
+
+  - name: Spotify
+    path: "~/Applications/Spotify.app"
+    pos: 6
+
