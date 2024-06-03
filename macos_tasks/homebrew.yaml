@@ -72,21 +72,24 @@
 
   - name: Setting up Homebrew Taps
     homebrew_tap:
-      name: "{{ homebrew_taps }}"
+      name: "{{ item }}"
       state: present
+    loop: "{{ homebrew_taps }}"
     when: homebrew_check.stat.exists or installation_result is succeeded
  
   - name: Installing Homebrew Cask Packages
     homebrew_cask:
-      name: "{{ homebrew_cask_packages }}"
+      name: "{{ item }}"
       state: present
       install_options: "appdir={{ homebrew_cask_dir }}"
+    loop: "{{ homebrew_cask_packages }}"
     when: homebrew_check.stat.exists or installation_result is succeeded
   
   - name: Installing Homebrew Packages
     homebrew:
-      name: "{{ homebrew_packages }}"
+      name: "{{ item }}"
       state: present
+    loop: "{{ homebrew_packages }}"
     when: homebrew_check.stat.exists or installation_result is succeeded
 
   - name: Install dockutil.
