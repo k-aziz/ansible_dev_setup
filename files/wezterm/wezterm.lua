@@ -3,7 +3,7 @@ local wezterm = require("wezterm")
 local config = {}
 
 --- Set default shell here for non-admin systems. (Avoids modifying /etc/shells)
-if wezterm.target_triple:match("arm64") then
+if wezterm.target_triple:match("arch64") then
 	config.default_prog = { "/opt/homebrew/bin/fish", "-l" }
 else
 	config.default_prog = { "/usr/local/bin/fish", "-l" }
