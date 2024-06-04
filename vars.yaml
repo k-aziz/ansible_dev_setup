@@ -6,8 +6,7 @@ setup_dock: true
 setup_dotfiles: true
 setup_system_defaults: true
 
-homebrew_taps:
-  - homebrew/bundle
+homebrew_taps: []
 
 # Defaults to User scope for non-admin systems
 homebrew_cask_dir: "~/Applications"
@@ -26,6 +25,7 @@ homebrew_packages:
   - fish
   - fd
   - fzf
+  - gh
   - neovim
   - pipenv
   - poetry
