@@ -24,6 +24,17 @@ The following variables in var.yaml can be changed if not all features are requi
 
 `setup_system_defaults` - Sets OSX default behaviours.
 
+## Run Locally
+
+- Clone project.
+- Install Ansible.
+
+`python3 -m pip install ansible`
+
+- Run playbook.
+
+`ansible-playbook -i inventory.ini -l local main.yaml`
+
 ## Using Control Node/Running On Multiple Hosts
 
 ### On Hosts (MacOS)
