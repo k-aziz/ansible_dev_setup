@@ -29,7 +29,15 @@ if type -q eza
 end
 
 if type -q fzf
-    fzf_configure_bindings --directory=\cf --git_log=\cl --git_status=\cs --processes=\cp
+    # Mac keyboard
+    # directory = "option + f"
+    # git_log = "option + l"
+    # git_status = "option + s"
+    # processes = "option + p"
+    # history = "option + r"
+    # variables = "option + v"
+    fzf_configure_bindings --directory=ƒ --git_log=¬ --git_status=ß --processes=π \
+        --history=® --variables=√
 end
 
 if type -q pyenv
