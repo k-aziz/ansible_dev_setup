@@ -7,6 +7,9 @@ fish_add_path -g $GOPATH/bin
 
 set -gx EDITOR nvim
 
+# suppress the default login message
+set -g fish_greeting
+
 # Allow installing casks in non-admin systems
 set -gx HOMEBREW_CASK_OPTS --appdir=~/Applications
 
@@ -23,6 +26,10 @@ if type -q eza
     abbr ll eza -l
     abbr lla eza -la
     abbr lt eza -T
+end
+
+if type -q fzf
+    fzf_configure_bindings --directory=\cf --git_log=\cl --git_status=\cs --processes=\cp
 end
 
 if type -q pyenv
