@@ -11,6 +11,7 @@ homebrew_taps: []
 # Defaults to User scope for non-admin systems
 homebrew_cask_dir: "~/Applications"
 homebrew_cask_packages:
+  - bruno
   - docker
   - firefox
   - font-ubuntu-mono-nerd-font
@@ -34,6 +35,7 @@ homebrew_packages:
   - rabbitmq
   - redis
   - rust
+  - starship
   - virtualenv
 
 fisher_plugins:
