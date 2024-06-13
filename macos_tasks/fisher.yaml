@@ -15,8 +15,7 @@
     when: fish_is_installed
 
   - name: Installing Fisher Plugins
-    shell: fisher install {{ item }}
-    args:
-      executable: "{{ install_path }}/fish"
-    with_items: "{{ fisher_plugins }}"
+    ansible.builtin.include_tasks: macos_tasks/fish_plugins.yaml
+    loop: "{{ fisher_plugins }}"
     when: fish_is_installed
+

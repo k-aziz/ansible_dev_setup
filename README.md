@@ -18,6 +18,10 @@ The following variables in var.yaml can be changed if not all features are requi
 
 `install_nvim_plugins` - Install plugins for the neovim text editor.
 
+`install_python` - Install the latest Python version with Pyenv.
+
+`install_rust` - Install the latest Rust version with Rustup.
+
 `setup_dock` - Configure Dock size and app positions.
 
 `setup_dotfiles` - Copies dotfiles in files directory and applies custom configurations.
@@ -76,6 +80,8 @@ If you do not need ansible to install homebrew the `-K` flag can be ommitted and
 - `dotfiles` - Copy dotfile configurations.
 - `fish` - Install fish plugins with fisherman.
 - `nvim` - Install nvim plugins.
+- `python` - Install Python
+- `rust` - Install Rust.
 - `system` - System configurations such as OSX defaults. Includes `dock` tagged tasks.
 
 [badge-gh-actions]: https://github.com/k-aziz/ansible_dev_setup/actions/workflows/ci.yaml/badge.svg?event=push

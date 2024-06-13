@@ -2,6 +2,8 @@ install_missing_homebrew: true
 install_homebrew_packages: true
 install_fisher_plugins: true
 install_nvim_plugins: true
+install_python: true
+install_rust: true
 setup_dock: true
 setup_dotfiles: true
 setup_system_defaults: true
@@ -34,7 +36,6 @@ homebrew_packages:
   - pyenv
   - rabbitmq
   - redis
-  - rust
   - starship
   - virtualenv
 

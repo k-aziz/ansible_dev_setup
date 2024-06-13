@@ -1,0 +1,14 @@
+---
+
+- name: Checking If {{ item | lower }} Is Already Installed
+  changed_when: false
+  ignore_errors: true
+  ansible.builtin.command: grep "{{ item | lower }}" ~/.config/fish/fish_plugins
+  register: plugin_grep_output
+
+- name: Installing {{ item }}
+  shell: fisher install {{ item }}
+  args:
+    executable: "{{ install_path }}/fish"
+  when: plugin_grep_output.rc != 0
+

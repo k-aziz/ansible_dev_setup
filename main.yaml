@@ -12,6 +12,8 @@
       shell: "killall Dock"
     - name: "Restart Finder"
       shell: "killall Finder"
+    - name: "Set Global Python Version To Latest"
+      shell: "{{ install_path }}/pyenv global 3"
   tasks:
     - when: ansible_os_family == "Darwin"
       block:
@@ -24,16 +26,16 @@
           when: install_homebrew_packages
 
         - name: Install dockutil.
+          tags: [ dock, system ]
           community.general.homebrew:
             name: dockutil
             state: present
           when:
             - homebrew_check.stat.exists or installation_result is succeeded
             - setup_dock
-          tags: [ dock, system ]
 
         - name: Register Variables
-          tags: [ fish, nvim ]
+          tags: always
           block:
           - name: Setting Package Install Path For Non-arm64
             ansible.builtin.set_fact:
@@ -77,4 +79,26 @@
             apply:
               tags: nvim
           when: install_nvim_plugins
+
+        - name: Installing Latest Python With Pyenv
+          tags: python
+          ansible.builtin.command:
+            cmd: "{{ install_path }}/pyenv install 3"
+            creates: ~/.pyenv/shims/python
+          notify: Set Global Python Version To Latest
+          when: install_python
+
+        - name: Installing Rust
+          tags: rust
+          shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          args:
+            creates: ~/.cargo/bin
+          when: install_rust
+
+        - name: Installing Virtualfish
+          tags: fish
+          ansible.builtin.pip:
+            name: virtualfish
+          when:
+            - fish_is_installed
 
