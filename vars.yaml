@@ -80,7 +80,11 @@ dockitems_persist:
     path: "~/Applications/Obsidian.app"
     pos: 5
 
+  - name: Bruno
+    path: "~/Applications/Bruno.app"
+    pos: 6
+
   - name: Spotify
     path: "~/Applications/Spotify.app"
-    pos: 6
+    pos: 7
 
