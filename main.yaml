@@ -95,6 +95,13 @@
             creates: ~/.cargo/bin
           when: install_rust
 
+        - name: Installing Rust-Analyzer
+          tags: rust
+          shell: rustup component add rust-analyzer
+          args:
+            creates: ~/.cargo/bin/rust-analyzer
+          when: install_rust
+
         - name: Installing Virtualfish
           tags: fish
           ansible.builtin.pip:
