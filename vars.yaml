@@ -1,12 +1,13 @@
 install_missing_homebrew: true
 install_homebrew_packages: true
 install_fisher_plugins: true
-install_nvim_plugins: true
 install_python: true
 install_rust: true
 setup_dock: true
 setup_dotfiles: true
 setup_system_defaults: true
+
+dotfiles_repo: git@github.com:k-aziz/dotfiles.git
 
 homebrew_taps: []
 
@@ -24,12 +25,14 @@ homebrew_cask_packages:
 
 homebrew_packages:
   - bat
+  - chezmoi
   - eza
   - fish
   - fd
   - fzf
   - gh
   - neovim
+  - npm
   - pipenv
   - poetry
   - postgresql@16
@@ -58,7 +61,7 @@ dockitems_remove:
   - TV
   - Music
   - News
-  - 'App Store'
+  - "App Store"
 
 dockitems_persist:
   - name: Mail
@@ -67,15 +70,15 @@ dockitems_persist:
   - name: WezTerm
     path: "~/Applications/WezTerm.app"
     pos: 2
- 
+
   - name: Firefox
     path: "~/Applications/Firefox.app"
     pos: 3
-  
+
   - name: VS Code
     path: "~/Applications/Visual Studio Code.app"
     pos: 4
-  
+
   - name: Obsidian
     path: "~/Applications/Obsidian.app"
     pos: 5
@@ -87,4 +90,3 @@ dockitems_persist:
   - name: Spotify
     path: "~/Applications/Spotify.app"
     pos: 7
-

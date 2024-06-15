@@ -16,17 +16,17 @@ The following variables in var.yaml can be changed if not all features are requi
 
 `install_fisher_plugins` - Installs plugins for the Fish shell using Fisherman.
 
-`install_nvim_plugins` - Install plugins for the neovim text editor.
-
 `install_python` - Install the latest Python version with Pyenv.
 
 `install_rust` - Install the latest Rust version with Rustup.
 
 `setup_dock` - Configure Dock size and app positions.
 
-`setup_dotfiles` - Copies dotfiles in files directory and applies custom configurations.
+`setup_dotfiles` - Copies dotfiles from a dotfiles repo. The repo must be compatible with chezmoi.
 
 `setup_system_defaults` - Sets OSX default behaviours.
+
+`dotfiles_repo` - Git repository to copy dotfiles from using chezmoi.
 
 ## Run Locally
 
@@ -70,8 +70,7 @@ The following variables in var.yaml can be changed if not all features are requi
 
 `ansible-playbook -i inventory.ini -l myhosts playbook.yaml -K`
 
-If you do not need ansible to install homebrew the `-K` flag can be ommitted and no sudo password will be required.
-
+If you do not need ansible to install homebrew the `-K` flag can be omitted and no sudo password will be required.
 
 ## Tags
 
@@ -79,7 +78,6 @@ If you do not need ansible to install homebrew the `-K` flag can be ommitted and
 - `dock` - Configure the MacOS dock.
 - `dotfiles` - Copy dotfile configurations.
 - `fish` - Install fish plugins with fisherman.
-- `nvim` - Install nvim plugins.
 - `python` - Install Python
 - `rust` - Install Rust.
 - `system` - System configurations such as OSX defaults. Includes `dock` tagged tasks.

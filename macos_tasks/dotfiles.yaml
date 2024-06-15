@@ -1,28 +1,18 @@
 ---
-  - name: Setup Dotfile Directories
-    file:
-      path: "{{ item }}"
-      state: directory
-      mode: 0700
-    loop:
-      - ~/.config
-      - ~/.config/fish
-      - ~/.config/wezterm
-      - ~/.config/git
-  
-  - name: Copy Config Files
-    copy:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
-      mode: 0600
-    loop:
-      - src: fish/config.fish
-        dest: ~/.config/fish/config.fish
-      - src: wezterm/wezterm.lua
-        dest: ~/.config/wezterm/wezterm.lua
-      - src: git/config
-        dest: ~/.config/git/config
-      - src: starship/starship.toml
-        dest: ~/.config/starship.toml
-      - src: starship/starship.toml.angular
-        dest: ~/.config/starship.toml.angular
+- name: Ensure Chezmoi Is Installed
+  ansible.builtin.stat:
+    path: "{{ install_path }}/chezmoi"
+  register: chezmoi_is_installed
+
+- name: Setup Dotfiles
+  ansible.builtin.command:
+    cmd: chezmoi init --apply --verbose {{ dotfiles_repo }}
+    creates: ~/.config/chezmoi
+  register: chezmoi_result
+  when: chezmoi_is_installed
+
+- name: Reporting Chezmoi Result
+  tags: [never, debug]
+  debug:
+    msg: "{{ chezmoi_result.stdout }}"
+  when: chezmoi_is_installed
