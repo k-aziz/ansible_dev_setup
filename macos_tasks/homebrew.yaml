@@ -1,102 +1,101 @@
 ---
-  # Always check for brew installation for tasks not tagged with `brew`
-  # that still may require installing a package with brew.
-  - name: Setting HomeBrew Path For Non-arm64
-    tags: always
-    ansible.builtin.set_fact:
-      homebrew_path: /usr/local/bin/brew
-    when: ansible_architecture != "arm64"
+# Always check for brew installation for tasks not tagged with `brew`
+# that still may require installing a package with brew.
+- name: Setting HomeBrew Path For Non-arm64
+  tags: always
+  ansible.builtin.set_fact:
+    homebrew_path: /usr/local/bin/brew
+  when: ansible_architecture != "arm64"
 
-  - name: Setting HomeBrew Path For arm64
-    tags: always
-    ansible.builtin.set_fact:
-      homebrew_path: /opt/homebrew/bin
-    when: ansible_architecture == "arm64"
+- name: Setting HomeBrew Path For arm64
+  tags: always
+  ansible.builtin.set_fact:
+    homebrew_path: /opt/homebrew/bin
+  when: ansible_architecture == "arm64"
 
-  - name: Ensuring Homebrew Is Installed
-    tags: always
-    ansible.builtin.stat:
-      path: "{{ homebrew_path }}"
-    register: homebrew_check
+- name: Ensuring Homebrew Is Installed
+  tags: always
+  ansible.builtin.stat:
+    path: "{{ homebrew_path }}"
+  register: homebrew_check
 
-  - name: Fail If Homebrew Is Not Installed and install_missing_homebrew Is False
-    tags: always
-    fail:
-      msg: Homebrew is missing... Install from http://brew.sh/
-    when:
-      - not homebrew_check.stat.exists
-      - not install_missing_homebrew
+- name: Fail If Homebrew Is Not Installed and install_missing_homebrew Is False
+  tags: always
+  fail:
+    msg: Homebrew is missing... Install from http://brew.sh/
+  when:
+    - not homebrew_check.stat.exists
+    - not install_missing_homebrew
 
-  - name: Getting Host Username
-    local_action: command whoami
-    register: username_on_the_host
-    when: not homebrew_check.stat.exists
+- name: Getting Host Username
+  local_action: command whoami
+  register: username_on_the_host
+  when: not homebrew_check.stat.exists
 
-  - name: Adding Host User To Passwordless Sudoers
-    become: true
-    copy:
-      dest: /etc/sudoers.d/ansible
-      content: "{{ username_on_the_host.stdout }} ALL=(ALL) NOPASSWD: ALL\n"
-      mode: '0440'
-      validate: 'visudo -cf %s'
-    when: 
-      - not ansible_check_mode
-      - not homebrew_check.stat.exists
+- name: Adding Host User To Passwordless Sudoers
+  become: true
+  copy:
+    dest: /etc/sudoers.d/ansible
+    content: "{{ username_on_the_host.stdout }} ALL=(ALL) NOPASSWD: ALL\n"
+    mode: "0440"
+    validate: "visudo -cf %s"
+  when:
+    - not ansible_check_mode
+    - not homebrew_check.stat.exists
 
-  - name: Installing Homebrew
-    shell: >
-      NONINTERACTIVE=1 /bin/bash -c
-      "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    args:
-      creates: "{{ homebrew_path }}"
-    register: installation_result
-    when:
-      - not homebrew_check.stat.exists
-      - install_missing_homebrew
+- name: Installing Homebrew
+  shell: >
+    NONINTERACTIVE=1 /bin/bash -c
+    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  args:
+    creates: "{{ homebrew_path }}"
+  register: installation_result
+  when:
+    - not homebrew_check.stat.exists
+    - install_missing_homebrew
 
-  - name: Checking If Sudoer File Was Created
-    ansible.builtin.stat:
-      path: "/etc/sudoers.d/ansible"
-    register: sudoer_file_check
+- name: Checking If Sudoer File Was Created
+  ansible.builtin.stat:
+    path: "/etc/sudoers.d/ansible"
+  register: sudoer_file_check
 
-  - name: Removing Host User From Passwordless Sudoers
-    become: true
-    file:
-      path: /etc/sudoers.d/ansible
-      state: absent
-    when: sudoer_file_check.stat.exists
+- name: Removing Host User From Passwordless Sudoers
+  become: true
+  file:
+    path: /etc/sudoers.d/ansible
+    state: absent
+  when: sudoer_file_check.stat.exists
 
-  - name: Running Homebrew Doctor
-    tags: [ never, debug ]
-    shell: brew doctor
-    register: brew_doctor
-    ignore_errors: true
-    when: homebrew_check.stat.exists or installation_result is succeeded
+- name: Running Homebrew Doctor
+  tags: [never, debug]
+  shell: brew doctor
+  register: brew_doctor
+  ignore_errors: true
+  when: homebrew_check.stat.exists or installation_result is succeeded
 
-  - name: Reporting Homebrew Doctor Output
-    tags: [ never, debug ]
-    debug:
-      msg: "{{ brew_doctor.stdout }}"
+- name: Reporting Homebrew Doctor Output
+  tags: [never, debug]
+  debug:
+    msg: "{{ brew_doctor.stdout }}"
 
-  - name: Setting up Homebrew Taps
-    homebrew_tap:
-      name: "{{ item }}"
-      state: present
-    loop: "{{ homebrew_taps }}"
-    when: homebrew_check.stat.exists or installation_result is succeeded
- 
-  - name: Installing Homebrew Cask Packages
-    homebrew_cask:
-      name: "{{ item }}"
-      state: present
-      install_options: "appdir={{ homebrew_cask_dir }}"
-    loop: "{{ homebrew_cask_packages }}"
-    when: homebrew_check.stat.exists or installation_result is succeeded
-  
-  - name: Installing Homebrew Packages
-    homebrew:
-      name: "{{ item }}"
-      state: present
-    loop: "{{ homebrew_packages }}"
-    when: homebrew_check.stat.exists or installation_result is succeeded
+- name: Setting up Homebrew Taps
+  homebrew_tap:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ homebrew_taps }}"
+  when: homebrew_check.stat.exists or installation_result is succeeded
 
+- name: Installing Homebrew Cask Packages
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+    install_options: "appdir={{ homebrew_cask_dir }}"
+  loop: "{{ homebrew_cask_packages }}"
+  when: homebrew_check.stat.exists or installation_result is succeeded
+
+- name: Installing Homebrew Packages
+  homebrew:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ homebrew_packages }}"
+  when: homebrew_check.stat.exists or installation_result is succeeded

@@ -1,8 +1,7 @@
----  
-
-  - when: setup_dock
-    tags: dock
-    block:
+---
+- when: setup_dock
+  tags: dock
+  block:
     - name: "Dock: Autohide"
       osx_defaults:
         domain: com.apple.dock
@@ -60,117 +59,116 @@
         extended: true
         extended_allitems: false
       when:
-          - item.pos is defined
-          - item.pos > 0
+        - item.pos is defined
+        - item.pos > 0
 
-  - name: "Finder: Show file extensions"
-    osx_defaults:
-      domain: com.apple.finder
-      key: AppleShowAllExtensions
-      type: bool
-      value: true
-    notify:
-      - "Restart Finder"
+- name: "Finder: Show file extensions"
+  osx_defaults:
+    domain: com.apple.finder
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+  notify:
+    - "Restart Finder"
 
-  - name: "Finder: Show hidden files"
-    osx_defaults:
-      domain: com.apple.finder
-      key: AppleShowAllFiles
-      type: bool
-      value: true
-    notify:
-      - "Restart Finder"
+- name: "Finder: Show hidden files"
+  osx_defaults:
+    domain: com.apple.finder
+    key: AppleShowAllFiles
+    type: bool
+    value: true
+  notify:
+    - "Restart Finder"
 
-  - name: "Finder: Sort folders first"
-    osx_defaults:
-      domain: com.apple.finder
-      key: _FXSortFoldersFirst
-      type: bool
-      value: true
-    notify:
-      - "Restart Finder"
+- name: "Finder: Sort folders first"
+  osx_defaults:
+    domain: com.apple.finder
+    key: _FXSortFoldersFirst
+    type: bool
+    value: true
+  notify:
+    - "Restart Finder"
 
-  - name: "Finder: Expanded Save Dialog"
-    osx_defaults:
-      domain: NSGlobalDomain
-      key: NSNavPanelExpandedStateForSaveMode
-      type: bool
-      value: true
-    notify:
-      - "Restart Finder"
+- name: "Finder: Expanded Save Dialog"
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode
+    type: bool
+    value: true
+  notify:
+    - "Restart Finder"
 
-  - name: "Finder: Expanded Print Dialog"
-    osx_defaults:
-      domain: NSGlobalDomain
-      key: PMPrintingExpandedStateForPrint
-      type: bool
-      value: true
-    notify:
-      - "Restart Finder"
+- name: "Finder: Expanded Print Dialog"
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: PMPrintingExpandedStateForPrint
+    type: bool
+    value: true
+  notify:
+    - "Restart Finder"
 
-  - name: "Finder: Save to disk by default"
-    osx_defaults:
-      domain: NSGlobalDomain
-      key: NSDocumentSaveNewDocumentsToCloud
-      type: bool
-      value: false
-    notify:
-      - "Restart Finder"
+- name: "Finder: Save to disk by default"
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSDocumentSaveNewDocumentsToCloud
+    type: bool
+    value: false
+  notify:
+    - "Restart Finder"
 
-  - name: "Finder: Show path bar"
-    osx_defaults:
-      domain: com.apple.finder
-      key: ShowPathbar
-      type: bool
-      value: true
-    notify:
-      - "Restart Finder"
+- name: "Finder: Show path bar"
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathbar
+    type: bool
+    value: true
+  notify:
+    - "Restart Finder"
 
-  - name: "Finder: Show Status bar"
-    osx_defaults:
-      domain: com.apple.finder
-      key: ShowStatusBar
-      type: bool
-      value: true
-    notify:
-      - "Restart Finder"
+- name: "Finder: Show Status bar"
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowStatusBar
+    type: bool
+    value: true
+  notify:
+    - "Restart Finder"
 
-  - name: "Finder: Disable .DS_Store files on USB Volumes"
-    osx_defaults:
-      domain: com.apple.desktopservices
-      key: DSDontWriteUSBStores
-      type: bool
-      value: true
-    notify:
-      - "Restart Finder"
+- name: "Finder: Disable .DS_Store files on USB Volumes"
+  osx_defaults:
+    domain: com.apple.desktopservices
+    key: DSDontWriteUSBStores
+    type: bool
+    value: true
+  notify:
+    - "Restart Finder"
 
-  - name: "Finder: Disable file extension change warning"
-    osx_defaults:
-      domain: com.apple.finder
-      key: FXEnableExtensionChangeWarning
-      type: bool
-      value: false
-    notify:
-      - "Restart Finder"
+- name: "Finder: Disable file extension change warning"
+  osx_defaults:
+    domain: com.apple.finder
+    key: FXEnableExtensionChangeWarning
+    type: bool
+    value: false
+  notify:
+    - "Restart Finder"
 
-  - name: "Trackpad: Table Three Finger Drag"
-    osx_defaults:
-      domain: com.apple.AppleMultitouchTrackpad
-      key: TrackpadThreeFingerDrag
-      type: bool
-      value: true
+- name: "Trackpad: Table Three Finger Drag"
+  osx_defaults:
+    domain: com.apple.AppleMultitouchTrackpad
+    key: TrackpadThreeFingerDrag
+    type: bool
+    value: true
 
-  - name: "Cursor: Reduce Initial Key Repeat Delay"
-    osx_defaults:
-      domain: NSGlobalDomain
-      key: InitialKeyRepeat
-      type: int
-      value: 10
-  
-  - name: "Cursor: Reduce Key Repeat Delay"
-    osx_defaults:
-      domain: NSGlobalDomain
-      key: KeyRepeat
-      type: int
-      value: 1
-  
+- name: "Cursor: Reduce Initial Key Repeat Delay"
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: InitialKeyRepeat
+    type: int
+    value: 15
+
+- name: "Cursor: Reduce Key Repeat Delay"
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: KeyRepeat
+    type: int
+    value: 1

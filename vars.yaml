@@ -31,6 +31,8 @@ homebrew_packages:
   - fd
   - fzf
   - gh
+  - git-delta
+  - gnu-sed
   - neovim
   - npm
   - pipenv
