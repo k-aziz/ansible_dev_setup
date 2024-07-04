@@ -7,8 +7,7 @@ setup_dock: true
 setup_dotfiles: true
 setup_system_defaults: true
 
-dotfiles_repo: git@github.com:k-aziz/dotfiles.git
-
+dotfiles_repo: https://github.com/k-aziz/dotfiles.git
 homebrew_taps: []
 
 # Defaults to User scope for non-admin systems
