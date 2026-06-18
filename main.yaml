@@ -93,9 +93,22 @@
             creates: ~/.cargo/bin/rust-analyzer
           when: install_rust
 
+        - name: Check If Fish Is Installed
+          tags: fish
+          ansible.builtin.stat:
+            path: "{{ install_path }}/fish"
+          register: fish_binary
+
         - name: Installing Virtualfish
           tags: fish
-          ansible.builtin.pip:
-            name: virtualfish
+          community.general.homebrew:
+            name: pipx
+            state: present
+
+        - name: Installing Virtualfish
+          tags: fish
+          ansible.builtin.command:
+            cmd: pipx install virtualfish
+            creates: ~/.local/bin/vf
           when:
-            - fish_is_installed
+            - fish_binary.stat.exists

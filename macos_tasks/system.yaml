@@ -24,7 +24,7 @@
       community.general.osx_defaults:
         domain: com.apple.dock
         key: tilesize
-        type: int
+        type: float
         value: 36
       notify:
         - "Restart Dock"
@@ -164,11 +164,11 @@
     domain: NSGlobalDomain
     key: InitialKeyRepeat
     type: int
-    value: 15
+    value: 30
 
 - name: "Cursor: Reduce Key Repeat Delay"
   osx_defaults:
     domain: NSGlobalDomain
     key: KeyRepeat
     type: int
-    value: 1
+    value: 10

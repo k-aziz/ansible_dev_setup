@@ -11,9 +11,9 @@
   args:
     executable: "{{ install_path }}/fish"
     creates: ~/.config/fish/fish_plugins
-  when: fish_is_installed
+  when: fish_is_installed.stat.exists
 
 - name: Installing Fisher Plugins
   ansible.builtin.include_tasks: macos_tasks/fish_plugins.yaml
   loop: "{{ fisher_plugins }}"
-  when: fish_is_installed
+  when: fish_is_installed.stat.exists
